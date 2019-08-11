@@ -19,12 +19,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
     private lateinit var nextButton: ImageButton
-    private lateinit var prevButton: ImageButton
+//    private lateinit var prevButton: ImageButton
     private lateinit var questionTextView: TextView
 
     private var questionBank: ArrayList<Question> = ArrayList()
 
     private var currentIndex: Int = -1
+    private var rightAnswer = 0f
 
     init {
         questionBank.add(Question(R.string.question_africa, false))
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         trueButton = true_button
         falseButton = false_button
         nextButton = next_button
-        prevButton = prev_button
+//        prevButton = prev_button
         questionTextView = question_text_view
 
         nextQuestion()
@@ -64,9 +65,9 @@ class MainActivity : AppCompatActivity() {
             nextQuestion()
         }
 
-        prevButton.setOnClickListener {
-            prevQuestion()
-        }
+//        prevButton.setOnClickListener {
+//            prevQuestion()
+//        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -79,9 +80,10 @@ class MainActivity : AppCompatActivity() {
             currentIndex++
             val question = questionBank[currentIndex].textResId
             questionTextView.setText(question)
+            trueButton.isEnabled = true
+            falseButton.isEnabled = true
         } else {
-            val question = questionBank[currentIndex].textResId
-            questionTextView.setText(question)
+            questionTextView.text = "Ваш счет: ${rightAnswer / questionBank.size}"
         }
     }
 
@@ -99,8 +101,12 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userPressedButton: Boolean) {
         val answer = questionBank[currentIndex].answerTrue
 
+        trueButton.isEnabled = false
+        falseButton.isEnabled = false
+
         val messageResId = if (userPressedButton == answer) {
-            nextQuestion()
+//            nextQuestion()
+            rightAnswer++
             R.string.correct_toast
         } else {
             R.string.incorrect_toast
