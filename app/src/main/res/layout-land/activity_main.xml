@@ -39,15 +39,6 @@
 
     </LinearLayout>
 
-
-    <ImageButton
-            android:id="@+id/prev_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/prev_button"
-            android:src="@android:drawable/ic_media_previous"
-            android:layout_gravity="bottom|start"/>
-
     <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
